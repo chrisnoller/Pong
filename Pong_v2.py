@@ -72,7 +72,8 @@ while not done:
 		if event.type == pygame.QUIT: # If user clicked close
 			done = True # We are done so we exit this loop
 		
-		if event.type == pygame.KEYDOWN: # Players utilize keyboard to move paddles
+		# Players utilize keyboard to move paddles
+		if event.type == pygame.KEYDOWN: 
 			if event.key == pygame.K_w:
 				player1.y_speed = -6
 			if event.key == pygame.K_UP:
