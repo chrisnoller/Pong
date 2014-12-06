@@ -82,8 +82,10 @@ while not done:
 			if event.key == pygame.K_DOWN:
 				player2.y_speed = 6
 			if event.key == pygame.K_SPACE: # Starts the ball movement
-				ball.x_speed = 3 * random.randrange(-1, 1, 2)
-				ball.y_speed = 3 * random.randrange(-1, 1, 2)
+				if ball.x_speed == 0 and ball.y_speed == 0:
+					ball.x_speed = 3 * random.choice([-1, 1]) # Initiates random direction of ball
+					ball.y_speed = 3 * random.choice([-1, 1])
+					
 		if event.type == pygame.KEYUP:
 			if event.key == pygame.K_w:
 				player1.y_speed = 0
@@ -119,10 +121,10 @@ while not done:
 	ball.x += ball.x_speed
 	ball.y += ball.y_speed
 	
+	# Update score of players
 	if ball.x < 0:
 		player2.score += 1
 		ball.__init__(WHITE, 20, 20)
-		
 	if ball.x > 700:
 		player1.score += 1
 		ball.__init__(WHITE, 20, 20)
@@ -134,8 +136,8 @@ while not done:
 	player1.draw(player1.y)
 	player2.draw(player2.y)
 	ball.draw(ball.x, ball.y)
-	screen.blit(player1.display_score, [0, 0])
-	screen.blit(player2.display_score, [615, 0])
+	screen.blit(player1.font.render("Score: %d " % (player1.score), True, WHITE), [5, 0])
+	screen.blit(player2.font.render("Score: %d " % (player2.score), True, WHITE), [600, 0])
 
 	# Update display
 	pygame.display.flip()
