@@ -17,6 +17,9 @@ done = False
 # Used to manage how fast the screen is updated
 clock = pygame.time.Clock()
 
+# Initiate sound variable
+paddle_sound = pygame.mixer.Sound("Blip.wav")
+
 # Create player class
 class Player():
 
@@ -109,10 +112,13 @@ while not done:
 	# Had to give a 4 pixel buffer since the ball won't always exactly hit the same part of paddle in x direction
 	if ball.x <= player1.x + 27 and (ball.x >= player1.x + 23):
 		if ball.y >= player1.y and (ball.y <= player1.y + 100):
+			paddle_sound.play()
 			ball.x_speed *= -1	
 	if ball.x >= player2.x - 27 and (ball.x <= player2.x - 23):
 		if ball.y >= player2.y and (ball.y <= player2.y + 100):
+			paddle_sound.play()
 			ball.x_speed *= -1
+			
 	
 	# Checks to see if ball has made contact with top or bottom of screen
 	if ball.y <= 0 or ball.y >= 480:
